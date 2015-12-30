@@ -1,0 +1,3 @@
+[submodule "smart-thesis"]
+	path = smart-thesis
+	url = https://github.com/astoeckel/smart-thesis

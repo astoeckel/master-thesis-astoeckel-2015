@@ -1,0 +1,55 @@
+\chapter{Conclusion and Outlook}
+\label{chp:conclusion}
+
+\glsunset{LIF}
+\glsunset{AdEx}
+\glsunset{BiNAM}
+
+In this final chapter we summarise the original work presented in the previous chapters as well as the insights gained from the experiments. The summary is followed by a catalogue of possible future work and the final conclusion.
+
+\section{Summary}
+
+In \cref{chp:spinam,chp:neuron_evaluation}, an entire pipeline for construction, execution and evaluation of spiking implementations of the Willshaw associative memory (\BiNAM) has been described. This pipeline includes the selection of the network topology, data encoding and appropriate neuron parameters (\cref{sec:neural_network_topology,chp:neuron_evaluation}), the generation of memory test data (\cref{sec:data_generation}) and measures for the assessment of the memory performance (\cref{sec:memory_evaluation_measures}).
+
+Neuron parameter selection itself has been based on three single neuron evaluation measures, discussed in \cref{sec:spike_train_measure,sec:sgso_measure,sec:sgmo_measure}. The \SGMO measure employs the novel \emph{fractional spike count} technique to estimate a smooth, computationally efficient network performance prediction, which is -- despite pending issues (\cref{sec:optimisation,sec:neuron_parameter_sweeps}) -- deemed suitable for parameter exploration and optimisation.
+
+A comprehensive software collection accompanies this thesis. With \AdExpSim, a framework for high performance single neuron simulation has been developed. Among other applications, it provides a graphical tool for interactive design space exploration (\cref{sec:adexpsim}). The \mbox{\PyNNLess} library allows simple, platform agnostic simulation of spiking neural networks in Python (\cref{sec:pynnless}). Built on top of \PyNNLess is \PyNAM, which conducts configurable parameter sweeps over the entire design space by simulating full \BiNAM networks on any selected target platform (\cref{sec:pynam}).
+
+In \cref{chp:experiments}, series of experiments on neuromorphic hardware systems and software simulators have been described, which conclusively show that the presented pipeline indeed allows the construction of an operational Willshaw associative memory. Full network design space explorations cohere well with the single neuron evaluation measures, underpinning their predictive power. Furthermore, one dimensional system parameter sweeps highlight significant differences in the results for the individual hardware platforms, confirming the conjecture that the \BiNAM is suitable as a low-level benchmark for neuromorphic hardware systems.
+
+\section{Future work}
+
+For the time being, some of the threads taken up in this thesis could not be spun to an end. Instead, a multitude of research topics has emerged from the presented work. This section lists both important tasks in the context of \HBP and lesser, yet interesting, future work.
+
+\subsection{Large scale simulations and benchmarking}
+The most obvious open task is the systematic large scale simulation and benchmarking of the \BiNAM on neuromorphic hardware. The feasibility of this task mainly depends on the availability and stability of the neuromorphic hardware and its associated software stack. It will be especially interesting to repeat the experiments on the new \HICANN chip revision for the \NMPM system. Large scale networks encompassing thousands of neurons could additionally uncover scaling issues in the hardware systems. 
+
+\marginnote{A proposed solution to the first software-wise challenge is the development of a dedicated network generator in C++. For the second problem, the \PyNAM tool must consolidate neurons in the \BiNAM into larger population objects, instead of issuing individual populations for each neuron. This was not possible at the time of writing due to issues with the hardware bindings.}
+Regarding the software presented in this thesis, two open challenges must be overcome. While it is fully functional, the performance of the \BiNAM network generator implemented in \PyNAM is a major bottleneck and has to be improved. Generating parameter sweeps for large networks may take multiple hours, in contrast to potentially much shorter run times on neuromorphic hardware. Secondly, the capabilities of \NMMC are currently not utilised to the fullest. Further optimisation is needed in both cases.
+
+\subsection{Neglected design space parameters}
+
+Some of the full network evaluation measures and design space parameters proposed in \cref{chp:spinam} could not be tested. This includes the energy consumption, the impact of neuron populations, as well as input sample pipelining. Verification of the energy prediction in \cref{eqn:energy} requires access to the ground truth data collected by the neuromorphic platforms, which is not yet available. It would be interesting to see whether the use of neuron populations improves the performance of the networks as anticipated. Implementation of the input data pipelining scheme presented in \cref{sec:input_output_time_window} would allow to operate the network at its limits and further improve the discriminatory properties of the network as a benchmark.
+
+\subsection{Extensions of the BiNAM network}
+
+The Willshaw associative memory model was implemented in this thesis in its most fundamental form. Multiple extensions of the model exist, which will be interesting to explore once the basic memory has been verified to work as intended on all hardware platforms. A first extension is the implementation of an adaptive threshold (\cref{sec:binam_failure_modes}), which would allow practical applications inside larger networks, such as the pattern completion example in \cref{sec:willshaw_theory}. Another possible extension is online training of synaptic weights using \gls{STDP}, a learning mechanism implemented on the \HBP neuromorphic hardware systems \cite{sjostrom2010spike}. Finally, the use of inhibitory synapses and more advanced models such as the spike-counter model could be studied \cite{knoblauch2003synchronization,knoblauch2014structural,muller2015programmierung}.
+
+\subsection{Neuron evaluation and parameter optimisation}
+
+The \SGSO and \SGMO single neuron evaluation measures do not perfectly cohere with the ground truth provided by the \enquote{spike train} measure. As elaborated in \cref{sec:single_neuron_empirical}, this is most likely an effect of the multiplication of the individual terms $p_1, p_0, p_\mathrm{reset}$, which overlap in a suboptimal way. As a solution, parameter tuning (slope of the sigmoid and bell-shaped distributions) or more intelligent combination of terms may be explored.
+
+\marginnote{Both, an implementation of an adaptive step size integrator and the \SGMO measure could be more challenging on a \GPU due to incoherent branching.}
+A \GPU implementation of the two-dimensional visualisation of the single neuron evaluation measures in \AdExpSim is another possible goal. The problem is intrinsically parallelisable, since each grid point in the visualisation corresponds to an independent single neuron evaluation. At least for the spike train and \SGSO measure, negligible memory usage and coherent branching are perfect prospects for a \GPU implementation.
+
+Regarding parameter optimisation, less naive methods than the Downhill Simplex with potentially faster convergence should be tested. Another extension to the optimisation process is closed-loop operation in conjunction with the neuromorphic hardware, which would eliminate any possible discrepancy between idealised single neuron simulation and the actual behaviour of the target platform.
+
+\subsection{Fractional spike count measure}
+The fractional spike count measure is a promising tool for general purpose neuron parameter optimisation, a problem commonly considered hard to solve. At least for applications in which neuron parameters are optimised with respect to a certain output spike count for a constant input, this method could complement current approaches \cite{prinz2007neuronal}. It would be interesting to see whether anomalies and computational complexity of the fractional spike count measure can be further reduced, for example by incorporating information about the neuron dynamics. Since the method is largely neuron model agnostic, it should be tested with more complex models, such as the \acrfull{HH} model \cite{hodgkin1952quantitative}.
+
+
+\section{Conclusion}
+
+The thesis has reached its primary goals to describe the design space of a spiking neural network implementation of the Willshaw associative memory, to provide the tools necessary for design space exploration and to successfully execute the memory on neuromorphic hardware.
+
+In order to benefit from the comprehensive theoretical framework encompassing the memory, the initial decision has been made to implement the network as close to the Willshaw model as possible, which in return necessitates careful tuning of the neuron parameters. Neuron parameter selection has been discussed at great length, starting with the neuron models themselves and their efficient numerical simulation, and finally culminating in three distinct evaluation measures. These have been shown to predict the behaviour of the full network. Equipped with the theoretical foundation of the Willshaw associative memory and optimised neuron parameters, the properties of the memory as a hardware benchmark have been examined and found to be highly promising. The presented work is a starting point for further research into associative memories in the context of the Humain Brain Project, and a yet so small step towards the development of artificial cognitive systems.

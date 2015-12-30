@@ -1,0 +1,922 @@
+% Sets
+
+\newcommand*{\B}{\gls{B}\xspace}
+\newglossaryentry{B}{
+	name=\ensuremath{\mathbb{B}},
+	sort=B,
+	description={Base set of Boolean algebra, defined as $\mathbb{B} = \{0, 1\}$}
+}
+
+% Functions
+
+\newcommand*{\Heaviside}{\gls{Heaviside}\xspace}
+\newglossaryentry{Heaviside}{
+	name=\ensuremath{H},
+	sort=H,
+	description={Heaviside function $H(x)$, named after the mathematician and physicist Oliver Heaviside}
+}
+
+\newcommand*{\threshold}{\gls{threshold}\xspace}
+\newglossaryentry{threshold}{
+	name=\ensuremath{\theta},
+	sort=theta,
+	description={Threshold value. Used in conjunction with McCulloch-Pitts neurons to specify the minimum neuronal excitation which causes a \enquote{one} at the output}
+}
+
+\newcommand*{\thresholdFunc}{\gls{thresholdFunc}\xspace}
+\newglossaryentry{thresholdFunc}{
+	name=\ensuremath{\Theta},
+	sort=Theta,
+	description={Vectorial threshold function. $\Theta_\theta(\vec z)$ returns a copy of $\vec z$ with all components greater of equal to $\theta$ set to one and all other values set to zero}
+}
+
+\newcommand*{\threshOne}{\gls{threshOne}\xspace}
+\newglossaryentry{threshOne}{
+	name=\ensuremath{n_1},
+	sort=n1,
+	description={Minimum number of input spikes for which a neuron in the spiking BiNAM implementation should produce $s^\mathrm{out}$ output spikes}
+}
+
+\newcommand*{\threshZero}{\gls{threshZero}\xspace}
+\newglossaryentry{threshZero}{
+	name=\ensuremath{n_0},
+	sort=n0,
+	description={Maximum number of input spikes for which a neuron in the spiking BiNAM implementation should produce no output spikes}
+}
+
+\newcommand*{\targetErr}{\gls{targetErr}\xspace}
+\newglossaryentry{targetErr}{
+	name=\ensuremath{e},
+	sort=e,
+	description={Target approximation error for an adaptive step size integrator}
+}
+
+\newcommand{\nState}{\gls{nState}\xspace}
+\newglossaryentry{nState}{
+	name=\ensuremath{\vec{v}},
+	sort=v,
+	description={Neuron state vector, $\vec{v} \in \R^\alpha$. For the AdEx model with conductance based excitatory and inhibitory synapses, the state vector is four dimensional, consisting of the membrane potential, the adaptation current and the excitatory and inhibitory channel conductances}
+}
+
+\newcommand{\nStateI}{\gls{nStateI}\xspace}
+\newglossaryentry{nStateI}{
+	name=\ensuremath{\vec{v}_0},
+	sort=vzero,
+	description={Initial neuron state at the beginning of the simulation}
+}
+
+\newcommand{\nStateDim}{\gls{nStateDim}\xspace}
+\newglossaryentry{nStateDim}{
+	name=\ensuremath{\alpha},
+	sort=alpha,
+	description={Dimensionality of the neuron state vector $\vec{v} \in \R^\alpha$}
+}
+
+% Neuron parameters
+
+\newcommand*{\Cm}{\gls{Cm}\xspace}
+\newglossaryentry{Cm}{
+	name=\ensuremath{C_\mathrm{m}},
+	sort=Cm,
+	description={Neuron membrane capacitance in farad}
+}
+
+% Neuron functions
+
+\newcommand*{\um}{\gls{um}\xspace}
+\newglossaryentry{um}{
+	name=\ensuremath{u},
+	sort=u,
+	description={Neuron membrane potential}
+}
+
+\newcommand*{\umax}{\gls{umax}\xspace}
+\newglossaryentry{umax}{
+	name=\ensuremath{u_\mathrm{max}},
+	sort=umax,
+	description={Maximum neuron membrane potential encountered during an experiment}
+}
+
+\newcommand*{\dum}{\gls{dum}\xspace}
+\newglossaryentry{dum}{
+	name=\ensuremath{\dot u},
+	sort=udot,
+	description={Time differential of the neuron membrane potential}
+}
+
+\newcommand*{\ddum}{\gls{ddum}\xspace}
+\newglossaryentry{ddum}{
+	name=\ensuremath{\ddot u},
+	sort=udot2,
+	description={Second order time differential of the neuron membrane potential}
+}
+
+\newcommand*{\pum}{\gls{pum}\xspace}
+\newglossaryentry{pum}{
+	name=\ensuremath{\Delta u},
+	sort=deltau,
+	description={Perturbation potential used in the fractional spike count measure}
+}
+
+\newcommand*{\DT}{\gls{DT}\xspace}
+\newglossaryentry{DT}{
+	name=\ensuremath{\Delta_\mathrm{Th}},
+	sort=deltaTh,
+	description={Spike slope factor in the AdEx model}
+}
+
+\newcommand*{\im}{\gls{im}\xspace}
+\newglossaryentry{im}{
+	name=\ensuremath{i},
+	sort=i,
+	description={Total neuronal current which charges and discharges the cell membrane. The total neuronal current is composed of the synaptic current $I_\mathrm{syn}$ and the channel current $I_\mathrm{chan}$}
+}
+
+\newcommand*{\ib}{\gls{ib}\xspace}
+\newglossaryentry{ib}{
+	name=\ensuremath{b},
+	sort=b,
+	description={Spike-triggered adaptation current in the AdEx model}
+}
+
+\newcommand*{\isyn}{\gls{isyn}\xspace}
+\newglossaryentry{isyn}{
+	name=\ensuremath{I_\mathrm{syn}},
+	sort=Isyn,
+	description={Synaptic or external component of the neuronal current $i$}
+}
+
+\newcommand*{\iadap}{\gls{iadap}\xspace}
+\newglossaryentry{iadap}{
+	name=\ensuremath{I_\mathrm{a}},
+	sort=ia,
+	description={Adaptation current in the AdEx neuron model}
+}
+
+\newcommand*{\isynk}{\gls{isynk}\xspace}
+\newglossaryentry{isynk}{
+	name=\ensuremath{I_\mathrm{syn}^k},
+	sort=Isynk,
+	description={Current induced by a single synapse $k$}
+}
+
+\newcommand{\ITh}{\gls{ITh}\xspace}
+\newglossaryentry{ITh}{
+	name=\ensuremath{I_\mathrm{Th}},
+	sort=Ith,
+	description={Exponential threshold current used in the AdEx model}
+}
+
+\newcommand{\IThMax}{\gls{IThMax}\xspace}
+\newglossaryentry{IThMax}{
+	name=\ensuremath{I_\mathrm{Th}^\mathrm{max}},
+	sort=IthMax,
+	description={Maximum the exponential threshold current $I_\mathrm{Th}$ is limited to for numerical integration}
+}
+
+\newcommand*{\ichan}{\gls{ichan}\xspace}
+\newglossaryentry{ichan}{
+	name=\ensuremath{I_\mathrm{chan}},
+	sort=Ichan,
+	description={Neuron model specific intrinsic component of the neuronal current $i$}
+}
+
+\newcommand*{\wsyn}{\gls{wsyn}\xspace}
+\newglossaryentry{wsyn}{
+	name=\ensuremath{w},
+	sort=w,
+	description={Synapse weight. For conductance based synapses the weight is measured in siemens, for current based synapses in ampere}
+}
+
+\newcommand*{\El}{\gls{El}\xspace}
+\newglossaryentry{El}{
+	name=\ensuremath{E_\mathrm{L}},
+	sort=EL,
+	description={Resting or leak potential. The membrane potential a neuron converges to over time}
+}
+
+\newcommand*{\Ei}{\gls{Ei}\xspace}
+\newglossaryentry{Ei}{
+	name=\ensuremath{E_\mathrm{i}},
+	sort=Ei,
+	description={Inhibitory reversal potential. Reversal potential of the inhibitory conductance based synapses, usually chosen smaller then the leak potential $E_\mathrm{L}$}
+}
+
+\newcommand*{\Ee}{\gls{Ee}\xspace}
+\newglossaryentry{Ee}{
+	name=\ensuremath{E_\mathrm{e}},
+	sort=Ee,
+	description={Excitatory reversal potential. Reversal potential of the excitatory conductance based synapses, usually chosen larger or equal to the threshold potential $E_\mathrm{Th}$}
+}
+
+\newcommand*{\Eeq}{\gls{Eeq}\xspace}
+\newglossaryentry{Eeq}{
+	name=\ensuremath{E_\mathrm{eq}},
+	sort=Eeq,
+	description={Neuron membrane equilibrium potential: the potential the membrane is pulled towards given the ionic channel conductances}
+}
+
+\newcommand*{\ETh}{\gls{ETh}\xspace}
+\newglossaryentry{ETh}{
+	name=\ensuremath{E_\mathrm{Th}},
+	sort=ETh,
+	description={Threshold potential. The membrane potential that has to be passed for a spike to be generated}
+}
+
+\newcommand*{\EThEff}{\gls{EThEff}\xspace}
+\newglossaryentry{EThEff}{
+	name=\ensuremath{E_\mathrm{Th}^\mathrm{eff}},
+	sort=EThEff,
+	description={Effective threshold potential. Minimum membrane potential in non-linear integrate-and-fire models that has to be exceeded in order to surely trigger an output spike, given that there is no sudden rise in an external discharging/inhibitory current $I_\mathrm{syn}$}
+}
+
+\newcommand*{\EThExp}{\gls{EThExp}\xspace}
+\newglossaryentry{EThExp}{
+	name=\ensuremath{E_\mathrm{Th}^\mathrm{exp}},
+	sort=EThExp,
+	description={Exponential threshold potential. Potential at which the inner term in the exponential of the AdEx model gets positive -- at this point an avalanche effect will increase the membrane potential and lead to the production of a spike}
+}
+
+\newcommand*{\Espike}{\gls{Espike}\xspace}
+\newglossaryentry{Espike}{
+	name=\ensuremath{E_\mathrm{spike}},
+	sort=Espike,
+	description={Spike potential, the maximum potential reached during a spike}
+}
+
+\newcommand*{\Ereset}{\gls{Ereset}\xspace}
+\newglossaryentry{Ereset}{
+	name=\ensuremath{E_\mathrm{reset}},
+	sort=Ereset,
+	description={Reset potential. The membrane potential to neuron resets to following an output spike}
+}
+
+\newcommand*{\TauE}{\gls{TauE}\xspace}
+\newglossaryentry{TauE}{
+	name=\ensuremath{\tau_\mathrm{e}},
+	sort=TauE,
+	description={Excitatory synapse time constant, controls the exponential decay of excitatory channel conductance $g_\mathrm{e}$}
+}
+
+\newcommand*{\TauI}{\gls{TauI}\xspace}
+\newglossaryentry{TauI}{
+	name=\ensuremath{\tau_\mathrm{i}},
+	sort=TauI,
+	description={Inhibitory synapse time constant, controls the exponential decay of inhibitory channel conductance $g_\mathrm{i}$}
+}
+
+\newcommand{\TauA}{\gls{TauA}\xspace}
+\newglossaryentry{TauA}{
+	name=\ensuremath{\tau_\mathrm{a}},
+	sort=TauA,
+	description={Adaptation current time constant, controls the exponential decay of the adaptation current $I_\mathrm{a}$ (in seconds)}
+}
+
+\newcommand{\TauM}{\gls{TauM}\xspace}
+\newglossaryentry{TauM}{
+	name=\ensuremath{\tau_\mathrm{m}},
+	sort=TauM,
+	description={Membrane potential time constant, controls the exponential decay of the membrane potential if no external input current is present. It holds $\tau_\mathrm{m} = C_\mathrm{m} / g_\mathrm{L}$. Measured in seconds}
+}
+
+
+\newcommand*{\TauRef}{\gls{TauRef}\xspace}
+\newglossaryentry{TauRef}{
+	name=\ensuremath{\tau_\mathrm{ref}},
+	sort=TauRef,
+	description={Refractory period. Period of time for which a neuron produces no further spikes. In the simple neuron models the membrane potential is clamped to $E_\mathrm{reset}$ during the refractory period}
+}
+
+\newcommand*{\Ge}{\gls{Ge}\xspace}
+\newglossaryentry{Ge}{
+	name=\ensuremath{g_\mathrm{e}},
+	sort=Ge,
+	description={Excitatory synapse conductance in siemens}
+}
+
+\newcommand*{\Gi}{\gls{Gi}\xspace}
+\newglossaryentry{Gi}{
+	name=\ensuremath{g_\mathrm{i}},
+	sort=Gi,
+	description={Inhibitory synapse conductance in siemens}
+}
+
+\newcommand*{\Ga}{\gls{Ga}\xspace}
+\newglossaryentry{Ga}{
+	name=\ensuremath{a},
+	sort=a,
+	description={Subthreshold adaptation conductance in the AdEx model in siemens}
+}
+
+\newcommand*{\Gl}{\gls{Gl}\xspace}
+\newglossaryentry{Gl}{
+	name=\ensuremath{g_\mathrm{L}},
+	sort=GL,
+	description={Conductance of the membrane leak channel in siemens}
+}
+
+\newcommand{\Le}{\gls{Le}\xspace}
+\newglossaryentry{Le}{
+	name=\ensuremath{\lambda_\mathrm{e}},
+	sort=lambdae,
+	description={Excitatory channel decay rate, substitute of the parameter $\tau_\mathrm{e}$}
+}
+
+\newcommand{\Li}{\gls{Li}\xspace}
+\newglossaryentry{Li}{
+	name=\ensuremath{\lambda_\mathrm{i}},
+	sort=lambdai,
+	description={Inhibitory channel decay rate, substitute of the parameter $\tau_\mathrm{i}$}
+}
+
+\newcommand{\La}{\gls{La}\xspace}
+\newglossaryentry{La}{
+	name=\ensuremath{\lambda_\mathrm{a}},
+	sort=lambdaa,
+	description={Adaptation channel decay rate, substitute of the parameter $\tau_\mathrm{a}$}
+}
+
+\newcommand{\Fl}{\gls{Fl}\xspace}
+\newglossaryentry{Fl}{
+	name=\ensuremath{f_\mathrm{L}},
+	sort=fL,
+	description={Membrane leak channel rate, substitute of the parameter $g_\mathrm{L}$}
+}
+
+\newcommand{\Fe}{\gls{Fe}\xspace}
+\newglossaryentry{Fe}{
+	name=\ensuremath{f_\mathrm{e}},
+	sort=fe,
+	description={Current excitatory channel frequency, substitute of the state variable $g_\mathrm{e}(t)$}
+}
+
+\newcommand{\Fi}{\gls{Fi}\xspace}
+\newglossaryentry{Fi}{
+	name=\ensuremath{f_\mathrm{i}},
+	sort=fi,
+	description={Current inhibitory channel frequency, substitute of the state variable $g_\mathrm{i}(t)$}
+}
+
+\newcommand{\Fw}{\gls{Fw}\xspace}
+\newglossaryentry{Fw}{
+	name=\ensuremath{f_\mathrm{w}},
+	sort=fw,
+	description={Synaptic weight, substitute of the parameter $w$}
+}
+
+\newcommand{\Fa}{\gls{Fa}\xspace}
+\newglossaryentry{Fa}{
+	name=\ensuremath{f_\mathrm{a}},
+	sort=fa,
+	description={Subthreshold adaptation, substitute of the parameter $a$}
+}
+
+\newcommand{\Fb}{\gls{Fb}\xspace}
+\newglossaryentry{Fb}{
+	name=\ensuremath{\Delta_\mathrm{b}},
+	sort=deltab,
+	description={Spike induced adaptation, substitute of the parameter $b$}
+}
+
+
+\newcommand{\Fadap}{\gls{Fadap}\xspace}
+\newglossaryentry{Fadap}{
+	name=\ensuremath{\Delta_\mathrm{a}},
+	sort=deltaa,
+	description={Adaptation induced voltage change, substitute of the state variable $I_\mathrm{a}(t)$}
+}
+
+
+% Variables
+
+\newcommand*{\stepSize}{\gls{stepSize}\xspace}
+\newglossaryentry{stepSize}{
+	name=\ensuremath{h},
+	sort=h,
+	description={Differential equation integrator step size}
+}
+
+\newcommand*{\ion}{\gls{ion}\xspace}
+\newglossaryentry{ion}{
+	name=\ensuremath{\mathcal{I}},
+	sort=I,
+	description={Place holder for an ion species with either positive or negative charge}
+}
+
+\newcommand*{\data}{\gls{data}\xspace}
+\newglossaryentry{data}{
+	name=\ensuremath{\mathfrak{D}},
+	sort=D,
+	description={Test dataset. Consists of \nSamples input and output vectors \(\mathfrak{D} = \{\vIn_k, \vOut_k\}\). Input and output vectors are alternatively represented as the input and output matrices $X$ and $Y$}
+}
+
+\newcommand*{\matIn}{\gls{matIn}\xspace}
+\newglossaryentry{matIn}{
+	name=\ensuremath{X},
+	sort=X,
+	description={Input data matrix, consists of $N$ input vectors organised in rows}
+}
+
+\newcommand*{\matOut}{\gls{matOut}\xspace}
+\newglossaryentry{matOut}{
+	name=\ensuremath{Y},
+	sort=Y,
+	description={Output data matrix, consists of $N$ output vectors organised in rows}
+}
+
+\newcommand*{\matData}{\gls{matData}\xspace}
+\newglossaryentry{matData}{
+	name=\ensuremath{B},
+	sort=B,
+	description={A binary matrix used as generalisation of $X$ and $Y$ in the data generation algorithms. The matrix contains either input or output vectors $\vec x_k, \vec y_k$ as rows}
+}
+
+\newcommand*{\memMat}{\gls{memMat}\xspace}
+\newglossaryentry{memMat}{
+	name=\ensuremath{M},
+	sort=M,
+	description={Binary matrix of size $m \times n$, storing the trained associations of the network}
+}
+
+\newcommand*{\vIn}{\gls{vIn}\xspace}
+\newglossaryentry{vIn}{
+	name=\ensuremath{\vec x},
+	sort=x,
+	description={$m$-dimensional binary input vector of the BiNAM}
+}
+
+\newcommand*{\dimIn}{\gls{dimIn}\xspace}
+\newglossaryentry{dimIn}{
+	name=\ensuremath{m},
+	sort=m,
+	description={Input dimensionality of the BiNAM}
+}
+
+\newcommand*{\info}{\gls{info}\xspace}
+\newglossaryentry{info}{
+	name=\ensuremath{I},
+	sort=I,
+	description={Information (or entropy) stored in a memory in bits}
+}
+
+\newcommand*{\vOut}{\gls{vOut}\xspace}
+\newglossaryentry{vOut}{
+	name=\ensuremath{\vec y},
+	sort=y,
+	description={$n$-dimensional binary output vector of the BiNAM}
+}
+
+\newcommand*{\vOutI}{\gls{vOutI}\xspace}
+\newglossaryentry{vOutI}{
+	name=\ensuremath{\tilde y},
+	sort=yTilde,
+	description={Intermediate result of the matrix-vector multiplication $M \cdot \vec x$ in the BiNAM recall rule}
+}
+
+\newcommand*{\vOutKAct}{\gls{vOutKAct}\xspace}
+\newglossaryentry{vOutKAct}{
+	name=\ensuremath{\hat y_k},
+	sort=yHatK,
+	description={Actual output of the BiNAM for a previously trained sample $\vec x_k$}
+}
+
+\newcommand*{\dimOut}{\gls{dimOut}\xspace}
+\newglossaryentry{dimOut}{
+	name=\ensuremath{n},
+	sort=n,
+	description={Output dimensionality of the BiNAM}
+}
+
+\newcommand*{\burstSizeIn}{\gls{burstSizeIn}\xspace}
+\newglossaryentry{burstSizeIn}{
+	name=\ensuremath{s^\mathrm{in}},
+	sort=sIn,
+	description={Input burst size, the number of spikes in an input burst used to convey the information of a \enquote{one} being sent}
+}
+
+\newcommand*{\burstSizeOut}{\gls{burstSizeOut}\xspace}
+\newglossaryentry{burstSizeOut}{
+	name=\ensuremath{s^\mathrm{out}},
+	sort=sOut,
+	description={Output burst size, the number of spikes expected from the network representing a \enquote{one}}
+}
+
+\newcommand*{\populationSize}{\gls{populationSize}\xspace}
+\newglossaryentry{populationSize}{
+	name=\ensuremath{K},
+	sort=K,
+	description={Population size. Number of neurons in the network output layer representing a single output component}
+}
+
+\newcommand*{\isi}{\gls{isi}\xspace}
+\newglossaryentry{isi}{
+	name=\ensuremath{\Delta t},
+	sort=deltaT,
+	description={Interspike interval (ISI), the equidistant delay between two spikes in a single spike burst in seconds}
+}
+
+\newcommand*{\jitter}{\gls{jitter}\xspace}
+\newglossaryentry{jitter}{
+	name=\ensuremath{\sigma_t},
+	sort=sigmaT,
+	description={Jitter, standard deviation of the Gaussian distribution the spikes of a single spike burst are selected from}
+}
+
+\newcommand*{\jitterOffs}{\gls{jitterOffs}\xspace}
+\newglossaryentry{jitterOffs}{
+	name=\ensuremath{\sigma_t^{\mathrm{offs}}},
+	sort=sigmaTOffs,
+	description={Standard deviation of the random offset $\mu_t^{\mathrm{offs}}$ for an entire burst}
+}
+
+\newcommand*{\jitterMeanOffs}{\gls{jitterMeanOffs}\xspace}
+\newglossaryentry{jitterMeanOffs}{
+	name=\ensuremath{\mu_t^{\mathrm{offs}}},
+	sort=muTOffs,
+	description={Random offset chosen for an entire spike burst. This value is once sampled for a spike burst from a Gaussian distribution with standard deviation $\sigma_t^{\mathrm{offs}}$}
+}
+
+\newcommand*{\jitterWSyn}{\gls{jitterWSyn}\xspace}
+\newglossaryentry{jitterWSyn}{
+	name=\ensuremath{\sigma_w},
+	sort=sigmaWSyn,
+	description={Standard deviation of the Gaussian noise added to the synaptic weight $w$, special case of $\sigma_\phi$}
+}
+
+\newcommand*{\jitterNParam}{\gls{jitterNParam}\xspace}
+\newglossaryentry{jitterNParam}{
+	name=\ensuremath{\sigma_\phi},
+	sort=sigmaPhi,
+	description={Standard deviation of a single neuron parameter $\phi$}
+}
+
+\newcommand{\pFp}{\gls{pFp}\xspace}
+\newglossaryentry{pFp}{
+	name=\ensuremath{p_1},
+	sort=p1,
+	description={Probability of a false-positive input (either a single bit or a spike) being added to the input data}
+}
+
+\newcommand{\pFn}{\gls{pFn}\xspace}
+\newglossaryentry{pFn}{
+	name=\ensuremath{p_0},
+	sort=p0,
+	description={Probability of an input entity (either a single bit or a spike) being removed from the input data (false-negative)}
+}
+
+\newcommand*{\timeWindow}{\gls{timeWindow}\xspace}
+\newglossaryentry{timeWindow}{
+	name=\ensuremath{T},
+	sort=T,
+	description={Time window size, a group of input and output spikes belonging together has to fit within this time window}
+}
+
+\newcommand*{\latency}{\gls{latency}\xspace}
+\newglossaryentry{latency}{
+	name=\ensuremath{\delta},
+	sort=delta,
+	description={Latency, time until the entire output for an input has been produced}
+}
+
+\newcommand*{\Ngroups}{\gls{Ngroups}\xspace}
+\newglossaryentry{Ngroups}{
+	name=\ensuremath{n_\mathrm{g}},
+	sort=nGroups,
+	description={Total number of experiment groups in the \enquote{spike train} evaluation measure}
+}
+
+\newcommand*{\nE}{\gls{nE}\xspace}
+\newglossaryentry{nE}{
+	name=\ensuremath{n_\mathrm{E}},
+	sort=nE,
+	description={Number of excitatory input bursts in an experiment group descriptor of the \enquote{spike train} evaluation measure}
+}
+
+\newcommand*{\nI}{\gls{nI}\xspace}
+\newglossaryentry{nI}{
+	name=\ensuremath{n_\mathrm{I}},
+	sort=nE,
+	description={Number of inhibitory input bursts in an experiment group descriptor of the \enquote{spike train} evaluation measure}
+}
+
+\newcommand*{\nOut}{\gls{nOut}\xspace}
+\newglossaryentry{nOut}{
+	name=\ensuremath{\tilde n^\mathrm{out}},
+	sort=ntildeout,
+	description={Expected number of output spike bursts in an experiment group descriptor of the \enquote{spike train} evaluation measure}
+}
+
+\newcommand*{\nOutI}{\gls{nOutI}\xspace}
+\newglossaryentry{nOutI}{
+	name=\ensuremath{\tilde n^\mathrm{out}_i},
+	sort=ntildeouti,
+	description={Expected number of output spikes in the $i$-th experiment group}
+}
+
+\newcommand*{\nOutA}{\gls{nOutA}\xspace}
+\newglossaryentry{nOutA}{
+	name=\ensuremath{n^\mathrm{out}},
+	sort=nout,
+	description={Actual number of output spike bursts}
+}
+
+\newcommand*{\nOutAI}{\gls{nOutAI}\xspace}
+\newglossaryentry{nOutAI}{
+	name=\ensuremath{n^\mathrm{out}_i},
+	sort=nouti,
+	description={Actual number of receviced output spikes in the $i$-th experiment group}
+}
+
+\newcommand*{\qOutA}{\gls{qOutA}\xspace}
+\newglossaryentry{qOutA}{
+	name=\ensuremath{q^\mathrm{out}},
+	sort=qouta,
+	description={Fractional output spike count, it holds $q^\mathrm{out} \in \R^+$}
+}
+
+\newcommand*{\pOutA}{\gls{pOutA}\xspace}
+\newglossaryentry{pOutA}{
+	name=\ensuremath{p^\mathrm{out}},
+	sort=pouta,
+	description={Fractional component of the fractional spike count measure, it holds $p^\mathrm{out} \in [0, 1) \subset \R$}
+}
+
+\newcommand*{\nOnesIn}{\gls{nOnesIn}\xspace}
+\newglossaryentry{nOnesIn}{
+	name=\ensuremath{c},
+	sort=c,
+	description={Number of ones in a memory input vector $\vec x$, defined as $c = \sum_i^m (\vec x)_i$}
+}
+
+\newcommand*{\nOnesOut}{\gls{nOnesOut}\xspace}
+\newglossaryentry{nOnesOut}{
+	name=\ensuremath{d},
+	sort=d,
+	description={Number of ones in a memory output vector $\vec y$, defined as $d = \sum_i^n (\vec y)_i$}
+}
+
+\newcommand*{\nSamples}{\gls{nSamples}\xspace}
+\newglossaryentry{nSamples}{
+	name=\ensuremath{N},
+	sort=N,
+	description={Number of samples trained in the BiNAM}
+}
+
+\newcommand*{\nFP}{\gls{nFP}\xspace}
+\newglossaryentry{nFP}{
+	name=\ensuremath{n_\mathrm{fp}},
+	sort=nfp,
+	description={Total number of false positive bits across the entire test dataset}
+}
+
+\newcommand*{\nFN}{\gls{nFN}\xspace}
+\newglossaryentry{nFN}{
+	name=\ensuremath{n_\mathrm{fn}},
+	sort=nfn,
+	description={Total number of false negative bits across the entire test dataset}
+}
+
+\newcommand*{\nFPk}{\gls{nFPk}\xspace}
+\newglossaryentry{nFPk}{
+	name=\ensuremath{n^k_{\mathrm{fp}}},
+	sort=nfpk,
+	description={Number of false positive bits for the recall of the $k$-th sample}
+}
+
+\newcommand*{\nFNk}{\gls{nFNk}\xspace}
+\newglossaryentry{nFNk}{
+	name=\ensuremath{n^k_{\mathrm{fn}}},
+	sort=nfnk,
+	description={Number of false negative bits for the recall of the $k$-th sample}
+}
+
+\newcommand*{\wE}{\gls{wE}\xspace}
+\newglossaryentry{wE}{
+	name=\ensuremath{w_\mathrm{E}},
+	sort=wE,
+	description={Weight factor to be applied to the excitatory synapse in the \enquote{spike train} evaluation measure}
+}
+
+
+\newcommand*{\wI}{\gls{wI}\xspace}
+\newglossaryentry{wI}{
+	name=\ensuremath{w_\mathrm{I}},
+	sort=wI,
+	description={Weight factor to be applied to the inhibitory synapse in the \enquote{spike train} evaluation measure}
+}
+
+\newcommand*{\Pgen}{\gls{Pgen}\xspace}
+\newglossaryentry{Pgen}{
+	name=\ensuremath{\mathcal{P}},
+	sort=P,
+	description={Abstract optimality value returned by a single neuron optimisation measure such as the spike train measure, the SGSO measure or the SGMO measure.}
+}
+
+\newcommand*{\PST}{\gls{PST}\xspace}
+\newglossaryentry{PST}{
+	name=\ensuremath{\mathcal{P}_{\mathrm{st}}},
+	sort=Pst,
+	description={Result of the \enquote{spike train} evaluation method. $\mathcal{P}_{\mathrm{st}}$ is defined as the ratio between the number of experiment groups for which the actual number of output spikes equals the expected number of output spike ands the total number of experiment groups}
+}
+
+\newcommand*{\PSTi}{\gls{PSTi}\xspace}
+\newglossaryentry{PSTi}{
+	name=\ensuremath{\mathcal{P}^i_{\mathrm{st}}},
+	sort=Psti,
+	description={Partial result of the $\mathcal{P}_\mathrm{st}$ evaluation measure for the $i$-th experiment group}
+}
+
+\newcommand*{\PSGSO}{\gls{PSGSO}\xspace}
+\newglossaryentry{PSGSO}{
+	name=\ensuremath{\mathcal{P}_{\mathrm{sgso}}},
+	sort=Psgso,
+	description={Result of the \enquote{single group, single output spike} evaluation method}
+}
+
+\newcommand*{\PSGMO}{\gls{PSGMO}\xspace}
+\newglossaryentry{PSGMO}{
+	name=\ensuremath{\mathcal{P}_{\mathrm{sgmo}}},
+	sort=Psgmo,
+	description={Result of the \enquote{single group, multiple output spikes} evaluation method}
+}
+
+\newcommand{\sgmoOffs}{\gls{sgmoOffs}\xspace}
+\newglossaryentry{sgmoOffs}{
+	name=\ensuremath{o},
+	sort=o,
+	description={Fractional target spike count offset. Used to account for non-linear fractional values connecting the upper corners of the underlying step function}
+}
+
+\newcommand{\nParams}{\gls{nParams}\xspace}
+\newglossaryentry{nParams}{
+	name=\ensuremath{\Phi},
+	sort=Phi,
+	description={Abstract spiking neuron parameter vector}
+}
+
+\newcommand{\nParam}{\gls{nParam}\xspace}
+\newglossaryentry{nParam}{
+	name=\ensuremath{\phi},
+	sort=phi,
+	description={A single abstract spiking neuron parameter}
+}
+
+\newcommand{\tIn}{\gls{tIn}\xspace}
+\newglossaryentry{tIn}{
+	name=\ensuremath{t^\mathrm{in}},
+	sort=tin,
+	description={Single input spike train in the case of single neuron simulation, or a list of input spike trains for each memory input component}
+}
+
+\newcommand{\kIn}{\gls{kIn}\xspace}
+\newglossaryentry{kIn}{
+	name=\ensuremath{k^\mathrm{in}},
+	sort=kin,
+	description={List of sample indices. Assigns a sample number to each input spike time in $t^\mathrm{in}$}
+}
+
+\newcommand{\wIn}{\gls{wIn}\xspace}
+\newglossaryentry{wIn}{
+	name=\ensuremath{w^\mathrm{in}},
+	sort=win,
+	description={Synaptic weight annotations for each input spike in single neuron simulation}
+}
+
+\newcommand{\tInI}{\gls{tInI}\xspace}
+\newglossaryentry{tInI}{
+	name=\ensuremath{t^\mathrm{in}_i},
+	sort=tini,
+	description={Input spike train for the $i$-th memory input component, or the $i$-th spike in a single neuron evaluation output spike train}
+}
+
+\newcommand{\tOut}{\gls{tOut}\xspace}
+\newglossaryentry{tOut}{
+	name=\ensuremath{t^\mathrm{out}},
+	sort=tout,
+	description={Single output spike train in the case of single neuron simulation, or list of output spike trains for each memory output component}
+}
+
+\newcommand{\tOutJ}{\gls{tOutJ}\xspace}
+\newglossaryentry{tOutJ}{
+	name=\ensuremath{t^\mathrm{out}_j},
+	sort=toutj,
+	description={Out spike train for the $j$-th memory input component, or the $j$-th spike in a single neuron evaluation output spike train}
+}
+
+% Acronyms
+
+\newcommand{\NMMC}{\acrshort{NMMC}\xspace}
+\newacronym[description={Neuromorphic many-core system (version one). A digital spiking neural network simulator consisting of thousands of low-powered microprocessors, developed at the University of Manchester}]{NMMC}{NM-MC1}{Neuromorphic Many-Core System}
+
+\newcommand{\NMPM}{\acrshort{NMPM}\xspace}
+\newacronym[description={Neuromorphic physical-model system (version one) developed at the Kirchhoff Institute for Physics at Heidelberg University. The NM-PM1 is a mixed-signal system which simulates the individual neurons with an analogue model circuit and uses digital routing infrastructure for inter-neuron spike propagation}]{NMPM}{NM-PM1}{Neuromorphic Physical-Model System}
+
+\newcommand{\ESS}{\gls{ESS}\xspace}
+\newacronym[description={Executable system specification. A software emulator of the NM-PM1 system}]{ESS}{ESS}{executable system specification}
+
+\newcommand{\NEST}{\acrshort{NEST}\xspace}
+\newacronym[description={Neural simulation tool. Software simulator for spiking neural network models}]{NEST}{NEST}{Neural Simulation Tool}
+
+\newcommand{\HICANN}{\acrshort{HICANN}\xspace}
+\newacronym[description={High input count analogue neural network. The actual analogue neural network chip on the NM-PM1 wafer}]{HICANN}{HICANN}{High Input Count Analogue Neural Network}
+
+\newcommand{\TDP}{\gls{TDP}\xspace}
+\newacronym[description={Thermal dissipation power}]{TDP}{TDP}{thermal dissipation power}
+
+\newcommand{\FACETS}{\acrshort{FACETS}\xspace}
+\newacronym[description={Fast analogue computing with emergent transient states. European research project in aimed at the development of the Spikey and HICANN neuromorphic hardware systems}]{FACETS}{FACETS}{Fast Analog Computing with Emergent Transient States}
+
+\newcommand{\BrainScaleS}{\acrshort{BrainScaleS}\xspace}
+\newacronym[description={Brain-inspired multiscale computation in neuromorphic hybrid systems. European research project with the goal (amongst others) to advance the wafer-scale HICANN system. A predecessor of the HBP}]{BrainScaleS}{BrainScaleS}{Brain-inspired multiscale computation in neuromorphic hybrid systems}
+
+\newcommand*{\ISI}{\gls{ISI}\xspace}
+\newacronym[description={Interspike interval, denoted as $\Delta t$}]{ISI}{ISI}{interspike interval}
+
+\newcommand*{\HBP}{\gls{HBP}\xspace}
+\newacronym[description={Human brain project. A European research project working towards an understanding of the human brain by constructing brain atlases and performing large-scale simulations of brain-like neural circuitry}]{HBP}{HBP}{Human Brain Project}
+
+\newcommand{\HH}{\gls{HH}\xspace}
+\newacronym[description={Hodgkin-Huxley neuron model. A detailed biophysical neuron model which sufficiently describes a variety of behavioural patterns of biological neurons}]{HH}{HH}{Hodgkin-Huxley}
+
+\newcommand*{\LIF}{\gls{LIF}\xspace}
+\newacronym[description={Linear integrate-and-fire neuron model. One of the most simple neuron models, supported on all hardware platforms}]{LIF}{LIF}{linear integrate-and-fire}
+
+\newcommand*{\MLP}{\gls{MLP}\xspace}
+\newacronym[description={Multilayer perceptron}]{MLP}{MLP}{multilayer perceptron}
+
+\newcommand*{\QIF}{\gls{QIF}\xspace}
+\newacronym[description={Quadratic integrate-and-fire neuron model}]{QIF}{QIF}{quadratic integrate-and-fire}
+
+\newcommand*{\EIF}{\gls{EIF}\xspace}
+\newacronym[description={Exponential integrate-and-fire neuron model}]{EIF}{EIF}{exponential integrate-and-fire}
+
+\newcommand*{\AdEx}{\gls{AdEx}\xspace}
+\newacronym[description={Adaptive exponential integrate-and-fire neuron model. Neuron model implemented on the NM-PM1 system}]{AdEx}{AdEx}{adaptive exponential integrate-and-fire}
+
+\newcommand{\MAT}{\gls{MAT}\xspace}
+\newacronym[description={Multi-timescale adaptive threshold neuron model}]{MAT}{MAT}{
+multi-timescale adaptive threshold}
+
+\newcommand*{\BiNAM}{\gls{BiNAM}\xspace}
+\newacronym[sort=BiNAM,description={Binary neural associative memory, also known as Willshaw associative memory}]{BiNAM}{\mbox{BiNAM}}{Binary Neural Associative Memory}
+
+\newcommand*{\SQNR}{\gls{SQNR}\xspace}
+\newacronym{SQNR}{SQNR}{Signal-to-quantisation-noise ratio}
+
+\newcommand*{\STI}{\acrshort{STI}\xspace}
+\newacronym{STI}{ST\textsubscript{10}}{Spike train evaluation measure with $n_\mathrm{g} = 10$ experiment groups}
+
+\newcommand*{\STII}{\acrshort{STII}\xspace}
+\newacronym{STII}{ST\textsubscript{100}}{Spike train evaluation measure with $n_\mathrm{g} = 100$ experiment groups}
+
+\newcommand*{\SGSO}{\acrshort{SGSO}\xspace}
+\newacronym{SGSO}{SGSO}{Single group, single output spike evaluation measure}
+
+\newcommand*{\SGMO}{\acrshort{SGMO}\xspace}
+\newacronym{SGMO}{SGMO}{Single group, multiple output spikes evaluation measure}
+
+\newcommand*{\RMSE}{\gls{RMSE}\xspace}
+\newacronym[description={Root mean square error. The RMSE is defined as: $$E = \sqrt{\frac{1}N \cdot \sum_{k=1}^N \| \vec t_k - \vec x_k \|^2} \,,$$ where $N$ is the number of samples, $\vec t_k$ are the reference samples and $\vec x_k$ the measured values}]{RMSE}{RMSE}{Root Mean Square Error}
+
+\newcommand*{\API}{\acrshort{API}\xspace}
+\newacronym[description={Application programming interface. Specification of a software interface (\eg a collection of classes, data types and functions) which allows programmers to incorporate third-party systems into their applications}]{API}{API}{application programming interface}
+
+\newcommand*{\PyNN}{\emph{\acrshort{PyNN}}\xspace}
+\newacronym[description={A Python package for simulator-independent specification of neuronal network models}]{PyNN}{PyNN}{PyNN}
+
+\newcommand*{\PyNNLess}{\emph{\acrshort{PyNNLess}}\xspace}
+\newacronym[description={Yet another python software abstraction layer on top of \emph{PyNN}, developed for this thesis. Allows the execution of the same network descriptors on all platforms}]{PyNNLess}{PyNNLess}{PyNNLess}
+
+\newcommand*{\PyNAM}{\emph{\acrshort{PyNAM}}\xspace}
+\newacronym[description={Python neural associative memory framework. Tool for conducting network-level parameter sweeps on neuromorphic hardware}]{PyNAM}{PyNAM}{Python neural associative memory framework}
+
+\newcommand*{\AdExpSim}{\emph{\acrshort{AdExpSim}}\xspace}
+\newacronym[description={Adaptive exponential neuron simulator framework. Collection of libraries and applications for single neuron evaluation}]{AdExpSim}{AdExpSim}{Adaptive exponential neuron simulator framework}
+
+
+\newcommand*{\IfCondExp}{\gls{IfCondExp}\xspace}
+\newacronym[description={Integrate-and-fire with conductance based exponential decay neuron model. Equivalent to the LIF model in conjunction with conductance based synapses with exponential decay}]{IfCondExp}{IfCondExp}{integrate-and-fire with conductance based exponential decay}
+
+\newcommand*{\DoF}{\gls{DoF}\xspace}
+\newcommand*{\DoFs}{\glspl{DoF}\xspace}
+\newacronym[description={Degree of freedom},longplural={degrees of freedom}]{DoF}{DoF}{degree of freedom}
+
+\newcommand*{\CPU}{\acrshort{CPU}\xspace}
+\newacronym{CPU}{CPU}{Central processing unit}
+
+\newcommand*{\GPU}{\acrshort{GPU}\xspace}
+\newacronym[description={Graphics processing unit. Massively parallel processor system primarily designed for 3D graphics processing. In the recent years also usable for general purpose computing}]{GPU}{GPU}{Graphics processing unit}
+
+\newacronym[description={Graphical user interface}]{GUI}{GUI}{graphical user interface}
+\newacronym[description={Command line interface}]{CLI}{CLI}{command line interface}
+
+\newcommand*{\JSON}{\acrshort{JSON}\xspace}
+\newacronym[description={JavaScript object notation, a text based format for the serialisation of data structures into a text based hierarchy of lists and dictionaries}]{JSON}{JSON}{JavaScript Object Notation}
+
+\newcommand*{\HDF}{\acrshort{HDF}\xspace}
+\newacronym[description={Hierarchical data format version 5. Storage format for the management of large and complex data collections}]{HDF}{HDF5}{Hierarchical data format}
+
+\newacronym[description={Spike-timing dependent plasticity. Scheme for Hebbian training of synapse weights in spiking neural networks}]{STDP}{STDP}{Spike-timing dependent plasticity}
+
+\newcommand*{\EPSP}{\acrshort{EPSP}\xspace}
+\newacronym[description={Excitatory post-synaptic potential. Change in the neuron membrane potential induced by the arrival of an input spike at an excitatory synapse}]{EPSP}{EPSP}{Excitatory post-synaptic potential}

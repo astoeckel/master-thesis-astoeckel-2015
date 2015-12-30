@@ -1,0 +1,22 @@
+COMPILE
+=======
+
+Run the following command to install the opencv libraries 
+
+> sudo yum install opencv-devel
+
+Compile using
+
+> make
+
+USAGE
+=====
+
+./hopfield <IMAGE_1> ... <IMAGE_N>
+
+For the "faces" example run
+
+./hopfield in/image_1.png in/image_2.png in/image_3.png in/image_4.png
+
+the displayed image is also stored in the "out" folder.
+

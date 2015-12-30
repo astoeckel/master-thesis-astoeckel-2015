@@ -1,0 +1,84 @@
+\chapter{Code Examples}
+
+\section{Single neuron integrator interface}
+\label{app:simulator_code}
+
+As discussed in \cref{sec:simulator}, the single neuron simulator must be highly flexible and at the same time as fast as possible. However, some of the demanded features are intrinsically slow, as they either require access to large chunks of memory (recording) or introduce additional branch instructions (early abortion), while the neuron integrator itself consists of few branches and solely accesses the neuron state vector \nState, which fits into a single vector register. The best solution to this features-versus-performance dilemma is to reduce each individual simulator instance to the actually required code. This is achieved by using the C++ template mechanism. The simulator function in the core library is declared as follows:
+\begin{minted}[fontsize=\small]{c++}
+template <uint8_t Flags = 0, typename Recorder,
+    typename Integrator, typename Controller>
+static void simulate(const SpikeVec &input, Recorder &recorder,
+    Controller &controller, Integrator &integrator,
+    const Parameters &p, Time tDelta, Time tEnd = MAX_TIME,
+    const State &v0 = State())
+\end{minted}
+The \texttt{Flags} template parameter is a bit-mask used to deactivate parts of the neuron model (degrading it to \acrshort{LIF}, deactivating spike handling), or to enable special features, such as support for perturbations. Since template parameters are evaluated at compile time, the compiler strips superfluous code paths from the individual simulator instances. The \texttt{recorder}, \texttt{controller} and \texttt{integrator} arguments are duck-typed, allowing references to objects of any type to be passed as long as the instantiation of \texttt{simulate} can be compiled \cite{stroustrup2013duck}. This allows to implement any kind of recording, cancellation (through the \texttt{controller}) and integration behaviour, without imposing overhead on other instances of the simulator. The \AdExpSim library comes with a variety of predefined recorders, controllers and integrators. The following code snippet demonstrates their usage:
+\begin{minted}[fontsize=\small]{c++}
+const Parameters params; // < Use default parameters
+DefaultController controller; // < Wait for neuron to settle
+DormandPrinceIntegrator integrator; // < Adaptive integrator
+/* Record the neuron parameter traces and print them */
+CsvRecorder<> recorder(params, 0.1e-3_s, std::cout);
+/* Single LIF neuron with deactivated spiking and input spikes
+   at 5 and 10 ms */
+Model::simulate<Model::IF_COND_EXP | Model::DISABLE_SPIKING>(
+	{{5_ms}, {10_ms}}, recorder, controller,
+	integrator, params, Time(-1));
+\end{minted}
+
+\section{PyNNLess code example}
+\label{app:pynnless_example}
+
+The following code example demonstrates the usage of the \PyNNLess library. It creates a single \LIF neuron, a spike source, connects both, and records a membrane potential trace.
+\begin{minted}[fontsize=\small]{python}
+import pynnless as pynl
+params = {
+    "cm": 0.2,       "v_reset": -70,
+    "e_rev_E": -40,  "v_thresh": -47,
+    "e_rev_I": -60,  "tau_m": 409.0,
+    "v_rest": -50,   "tau_refrac": 20.0
+}
+sim = pynl.PyNNLess("spikey") # Open the "spikey" device
+res = sim.run(pynl.Network() # Construct the network and run it
+        .add_source(spike_times=[0, 1000, 2000])
+        .add_population(
+            pynl.IfCondExpPopulation(params=params)
+                .record_spikes()
+                .record_v()
+        )
+        .add_connection((0, 0), (1, 0), weight=0.024))
+for i in xrange(len(res[1]["v_t"])): # Print the trace
+    print(str(res[1]["v_t"][i]) + ";" + res[1]["v"][0][i]))
+\end{minted}
+
+\section{PyNAM experiment descriptor}
+\label{app:pynam_experiment_json}
+
+This excerpt shows an example of the \PyNAM experiment descriptor, which performs a two dimensional sweep over \Gl and \TauE.
+{\begingroup
+\small
+\begin{minted}[fontsize=\small]{javascript}
+{"data": {
+  "n_bits_in": 16, /* m */  "n_bits_out": 16, /* n */
+  "n_ones_in": 3,  /* c */  "n_ones_out": 3,  /* d */ },
+"topology": {
+  "params": { /* Neuron parameters */ },
+  "neuron_type": "IF_cond_exp",
+  "w": 0.03, "multiplicity": 1 /* K */},
+"input": {
+  "burst_size": 1, /* sIn */, "time_window": 200.0, /* T */
+  "isi": 2.0,  /* Delta T */, "sigma_t": 5.0,
+  "sigma_t_offs": 0.0, "p0": 0.0, "p1": 0.0},
+"output": { "burst_size": 1 }, // sOut
+"experiments": [
+  {
+    "name": "Sweep gL, tauE",
+    "sweeps": {
+      "topology.params.g_leak": {
+         "min": 0.001, "max": 0.2, "count": 64},
+      "topology.params.tau_syn_E": {
+         "min": 1.0, "max": 20.0, "count": 64}},
+    "repeat": 1
+}]}
+\end{minted}
+\endgroup}

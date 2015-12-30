@@ -1,0 +1,304 @@
+\chapter{Tables}
+
+This appendix contains a wide selection of tables which would have taken too much space in the main part.
+
+\section{Runge-Kutta coefficients}
+
+The following two tables contain the Runge-Kutta coefficients for three basic, non adaptive differential equation integrators, and the more advanced adaptive Dormand-Prince integrator.
+
+\begin{table}[h]
+	\caption[Constant step size integrator Runge-Kutta coefficients]{Constant step size integrator Runge-Kutta coefficients for the first-order Euler method, the second-order midpoint method and the classical fourth-order Runge-Kutta method.}
+	\small
+	\subtop[Euler]{
+		\begin{minipage}{0.2\textwidth}
+			\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{r | r}
+				$b_j$ & $1$\\
+				\hline
+				\hspace{0.935cm} & $1$
+			\end{tabular}\\[0.2cm]
+			\begin{tabular}{r r | r}
+				& & \multicolumn{1}{l}{$\ell$} \\
+				& $a_{j\ell}$ & $1$\\
+				\hline
+				\multirow{1}{*}{$j$} & $1$ & /\\
+			\end{tabular}
+		\end{minipage}
+	}%
+	\subtop[Midpoint]{%
+		\begin{minipage}{0.25\textwidth}
+			\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{r | r r}
+				$b_j$ & $1$ & $2$\\
+				\hline
+				\hspace{0.935cm} & $0$ & $1$
+			\end{tabular}\\[0.2cm]
+			\begin{tabular}{r r | r r}
+				& & \multicolumn{2}{c}{$\ell$} \\
+				& $a_{j\ell}$ & $1$ & $2$\\
+				\hline
+				\multirow{2}{*}{$j$} & $1$ &  / &  / \\
+				& $2$ & $\nicefrac{1}2$ & /\\
+			\end{tabular}
+		\end{minipage}
+	}%
+	\vspace{0.5cm}
+	\subtop[Classical Runge-Kutta]{
+		\hspace*{0.2cm}%
+		\begin{minipage}{0.55\textwidth}
+			\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{r | r r r r}
+				$b_i$ & $1$ & $2$ & $3$ & $4$\\
+				\hline
+				\hspace{0.935cm} & $\nicefrac{1}6$ & $\nicefrac{1}3$ & $\nicefrac{1}3$ & $\nicefrac{1}6$
+			\end{tabular}\\[0.2cm]
+			\begin{tabular}{r r | r r r r}
+				& & \multicolumn{4}{c}{$\ell$} \\
+				& $a_{j\ell}$ & $1$ & $2$ & $3$ & $4$\\
+				\hline
+				\multirow{4}{*}{$j$} & $1$ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/\\
+				& $2$ & $\nicefrac{1}2$ & / & / & /\\
+				& $3$ & $0$ & $\nicefrac{1}2$ & / & /\\
+				& $4$ & $0$ & $0$ & $1$ & /
+			\end{tabular}
+		\end{minipage}
+	}
+	\label{tbl:runge-kutta-coeff}
+\end{table}
+
+\begin{table}
+	\small
+	\caption[Adaptive step size integrator Runge-Kutta coefficients]{Runge-Kutta coefficients for the fifth-order Dormand-Prince integrator, which can be used as adaptive step size integrator \cite{dormand1980family}.}
+	\begin{minipage}{\textwidth}
+		\centering
+		\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{r | r r r r r r r}
+			$b_i$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$\\
+			\hline
+			\hspace{0.935cm} & $\frac{35}{384}$ & 0 & $\frac{500}{1113}$ & $\frac{125}{192}$ & $-\frac{2187}{6784}$ & $\frac{11}{84}$ & 0
+		\end{tabular}\\[0.2cm]
+		\begin{tabular}{r r | r r r r r r r}
+			& & \multicolumn{7}{c}{$\ell$} \\
+			& $a_{j\ell}$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$\\
+			\hline
+			\multirow{7}{*}{$j$} & $1$ & \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/ &  \hspace{0.5cm}/\\
+			& $2$ & $\frac{1}5$ & / & / & / & / & / & / \\
+			& $3$ & $\frac{3}{40}$ & $\frac{9}{40}$ & / & / & / & / & /\\
+			& $4$ & $\frac{44}{45}$ & $-\frac{56}{15}$ & $\frac{32}9$ & / & / & / & /\\
+			& $5$ & $\frac{19372}{6561}$ & $-\frac{25360}{2187}$ & $\frac{64448}{6561}$ & $-\frac{212}{729}$ & / & / & /\\
+			& $6$ & $\frac{9017}{3168}$ & $-\frac{355}{33}$ & $\frac{46732}{5247}$ & $\frac{49}{176}$ & $-\frac{5103}{18656}$ & / & /\\
+			& $7$ & $\frac{35}{384}$ & $0$ & $\frac{500}{1113}$ & $\frac{125}{192}$ & $-\frac{2187}{6784}$ & $\frac{11}{84}$ & /\\
+		\end{tabular}\\[0.4cm]
+		~~
+	\end{minipage}
+	\label{tbl:dormand-prince-coeff}
+\end{table}
+
+\section{Integrator runtime profiles}
+
+\cref{tbl:benchmark_profile,tbl:benchmark_profile_fastexp} show the relative runtime of non-kernel functions in the differential equation integrator benchmark program with and without exponential function approximation. Functions with a relative runtime smaller than $1\%$ were discarded. Measurements were performed with the sampling profiler \texttt{perf}\footnote{More information about \texttt{perf} can be found at \url{https://perf.wiki.kernel.org/}.} developed as part of the Linux kernel project \cite{de2010new}. The experiment was performed on an Intel Core2Duo E7300 \CPU clocked at 2.66GHz. The \enquote{$\circ$}-module refers to the \texttt{AdExpIntegratorBenchmark} main program. See the next section for absolute times.
+
+\begin{table}[h]
+	\caption[Simulator profile with IEEE~754 exponential]{Single neuron simulator runtime profile with IEEE~754 exponential.}
+	\label{tbl:benchmark_profile}
+	\small
+	\centering
+	\begin{tabular}{r l l}
+		\toprule
+		\textit{Time} & \textit{Module} & \textit{Function} \\
+		\midrule
+		26.47\% & \texttt{libm-2.22} & \texttt{\_\_ieee754\_exp\_sse2} \\
+		15.24\% & $\circ$  & \texttt{BenchmarkResult::compare} \\
+		13.97\% & $\circ$  & \texttt{Model::simulate<DormandPrinceIntegrator>} \\
+		11.05\% & \texttt{libc-2.22} & \texttt{\_\_memmove\_ssse3} \\
+		6.56\% & $\circ$  & \texttt{RungeKuttaIntegrator::integrate} \\
+		4.18\% & $\circ$ & \texttt{benchmarkSimple<MidpointIntegrator>} \\
+		3.97\% & $\circ$  & \texttt{std::vector::emplace\_back<double>} \\
+		3.23\% & $\circ$  & \texttt{benchmarkSimple<EulerIntegrator>} \\
+		2.51\% & $\circ$  & \texttt{Model::simulate<RungeKuttaIntegrator>} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\caption[Simulator profile with approximated exponential]{Single neuron simulator runtime profile with approximated exponential.}
+	\label{tbl:benchmark_profile_fastexp}
+	\small
+	\centering
+	\begin{tabular}{r l l}
+		\toprule
+		\textit{Time} & \textit{Module} & \textit{Function} \\
+		\midrule
+		20.06\% & $\circ$  & \texttt{Model::simulate<DormandPrinceIntegrator>} \\
+		17.18\% & $\circ$  & \texttt{BenchmarkResult::compare} \\
+		14.05\% & \texttt{libc-2.22} & \texttt{\_\_memmove\_ssse3} \\
+		7.30\% & $\circ$ & \texttt{benchmarkSimple<MidpointIntegrator>} \\
+		7.21\% & $\circ$ & \texttt{RungeKuttaIntegrator::integrate} \\
+		5.26\% & $\circ$ & \texttt{benchmarkSimple<EulerIntegrator>} \\
+		5.01\% & $\circ$ & \texttt{Model::aux} \\
+		4.54\% & $\circ$ & \texttt{std::vector::emplace\_back<double>} \\
+		3.41\% & $\circ$ & \texttt{Model::simulate<RungeKuttaIntegrator>} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{Integrator benchmark}
+\label{app:integrator_benchmark}
+
+\cref{tbl:integrator_adexp,tbl:integrator_ifcondexp,tbl:integrator_adexp_fastexp} show absolute time and error values for the \AdEx and \LIF neuron model. The experiment is repeated for the \AdEx model with exponential function approximation. The experiments were performed on an Intel Xeon \CPU E5-2620 clocked at 2.00GHz.
+
+% BENCHMARK 1: AdExp Model
+% ========================
+
+\begin{sidewaystable}[p]
+\caption[Integrator performance for the AdExp model]{\parbox[t][][t]{19.5cm}{Differential equation integrator performance for the AdExp model. Errors are RMSE values compared to a Runge-Kutta integration with $\SI{100}{\nano\second}$ sample time. Percentages represent RMSE normalised to the value range. Simulated time is \SI{10}{\second} at 100 input spike groups with 33 output spikes.}}
+\small
+\centering
+\begin{tabular}{p{1.5cm} l r r r rr rr rr rr r}
+	\toprule
+	\multicolumn{2}{c}{\multirow{2}{*}{\textit{Integrator}}} &\multicolumn{3}{c}{\textit{Time and samples}} &\multicolumn{9}{c}{\textit{Error (RMSE)}} \\
+	\cmidrule(r){3-5}\cmidrule(l){6-14}
+	 &
+ & \multicolumn{1}{c}{$t \, [\si{\milli\second}]$} & \multicolumn{1}{c}{$N$} & \multicolumn{1}{c}{$\frac{t}{N} \, [\si{\micro\second}]$} & \multicolumn{2}{c}{$\um \, [\si{\milli\volt}]$ (\%)} & \multicolumn{2}{c}{$\Ge \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$\Gi \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$w \, [\si{\nano\ampere}]$ (\%)} & Avg. \% \\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Euler}}
+		& $h=\SI{1}{\micro\second}$	&   2476.087	& 10011577	&      0.247	&      0.360	& (0.36)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.33)	& 0.17\\
+		& $h=\SI{10}{\micro\second}$	&    209.023	&  1002278	&      0.209	&      0.932	& (0.93)	&      0.012	& (0.01)	&      0.004	& (0.01)	&      0.001	& (0.72)	& 0.42\\
+		& $h=\SI{100}{\micro\second}$	&     18.174	&   101255	&      0.179	&      3.530	& (3.53)	&      0.122	& (0.11)	&      0.039	& (0.07)	&      0.011	& (6.60)	& 2.58\\
+		& $h=\SI{1}{\milli\second}$	&      2.034	&    11190	&      0.182	&      8.358	& (8.36)	&      1.225	& (1.07)	&      0.382	& (0.64)	&      0.017	& (10.66)	& 5.18\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Midpoint}}
+		& $h=\SI{1}{\micro\second}$	&   3609.626	& 10011577	&      0.361	&      0.303	& (0.30)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.29)	& 0.15\\
+		& $h=\SI{10}{\micro\second}$	&    329.711	&  1002278	&      0.329	&      0.882	& (0.88)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.69)	& 0.39\\
+		& $h=\SI{100}{\micro\second}$	&     29.946	&   101249	&      0.296	&      3.500	& (3.50)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.033	& (20.38)	& 5.97\\
+		& $h=\SI{1}{\milli\second}$	&      3.047	&    11161	&      0.273	&     42.301	& (42.30)	&      0.088	& (0.08)	&      0.027	& (0.05)	&      2.428	& (1516.89)	& 389.83\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Runge-Kutta}}
+		& $h=\SI{1}{\micro\second}$	&   5801.178	& 10011577	&      0.579	&      0.296	& (0.30)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.29)	& 0.15\\
+		& $h=\SI{10}{\micro\second}$	&    542.762	&  1002278	&      0.542	&      0.868	& (0.87)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.72)	& 0.40\\
+		& $h=\SI{100}{\micro\second}$	&     56.256	&   101250	&      0.556	&      4.052	& (4.05)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.043	& (26.95)	& 7.75\\
+		& $h=\SI{1}{\milli\second}$	&      5.410	&    11149	&      0.485	&     48.260	& (48.26)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      2.754	& (1720.35)	& 442.15\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{6}{*}{\parbox{1.5cm}{\raggedleft Dormand-Prince}}
+		& $e=\SI{1}{\micro\nothing}$	&   3244.054	&  1934005	&      1.677	&      0.295	& (0.30)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.30)	& 0.15\\
+		& $e=\SI{10}{\micro\nothing}$	&    774.668	&   699606	&      1.107	&      0.290	& (0.29)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.28)	& 0.14\\
+		& $e=\SI{100}{\micro\nothing}$	&     80.463	&    74549	&      1.079	&      0.328	& (0.33)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.32)	& 0.16\\
+		& $e=\SI{1}{\milli\nothing}$	&     11.903	&    10783	&      1.104	&      0.573	& (0.57)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.63)	& 0.30\\
+		& $e=\SI{10}{\milli\nothing}$	&      5.444	&     4549	&      1.197	&      1.517	& (1.52)	&      0.003	& (0.00)	&      0.001	& (0.00)	&      0.007	& (4.21)	& 1.43\\
+		& $e=\SI{100}{\milli\nothing}$	&      4.791	&     3934	&      1.218	&      5.767	& (5.77)	&      0.029	& (0.03)	&      0.008	& (0.01)	&      0.029	& (18.18)	& 6.00\\
+	\bottomrule
+\end{tabular}
+\label{tbl:integrator_adexp}
+\end{sidewaystable}
+
+% BENCHMARK 3: IfCondExp Model
+% ============================
+
+\begin{sidewaystable}[p]
+\caption[Integrator performance for the IfCondExp model]{\parbox[t][][t]{19.5cm}{Differential equation integrator performance for the IfCondExp model. Errors are RMSE values compared to a Runge-Kutta integration with $\SI{100}{\nano\second}$ sample time. Percentages represent RMSE normalised to the value range. Simulated time is \SI{10}{\second} at 100 input spike groups with 33 output spikes.}}
+\small
+\centering
+\begin{tabular}{p{1.5cm} l r r r rr rr rr rr r}
+	\toprule
+	\multicolumn{2}{c}{\multirow{2}{*}{\textit{Integrator}}} &\multicolumn{3}{c}{\textit{Time and samples}} &\multicolumn{9}{c}{\textit{Error (RMSE)}} \\
+	\cmidrule(r){3-5}\cmidrule(l){6-14}
+	 &
+ & \multicolumn{1}{c}{$t \, [\si{\milli\second}]$} & \multicolumn{1}{c}{$N$} & \multicolumn{1}{c}{$\frac{t}{N} \, [\si{\micro\second}]$} & \multicolumn{2}{c}{$\um \, [\si{\milli\volt}]$ (\%)} & \multicolumn{2}{c}{$\Ge \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$\Gi \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$w \, [\si{\nano\ampere}]$ (\%)} & Avg. \% \\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Euler}}
+		& $h=\SI{1}{\micro\second}$	&   2071.354	& 10011577	&      0.207	&      0.223	& (0.22)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.06\\
+		& $h=\SI{10}{\micro\second}$	&    130.804	&  1002322	&      0.131	&      0.739	& (0.74)	&      0.012	& (0.01)	&      0.004	& (0.01)	&      0.000	& (0.00)	& 0.19\\
+		& $h=\SI{100}{\micro\second}$	&     12.139	&   101298	&      0.120	&      2.508	& (2.51)	&      0.122	& (0.11)	&      0.039	& (0.07)	&      0.000	& (0.00)	& 0.67\\
+		& $h=\SI{1}{\milli\second}$	&      1.198	&    11226	&      0.107	&      8.079	& (8.08)	&      1.225	& (1.07)	&      0.382	& (0.64)	&      0.000	& (0.00)	& 2.45\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Midpoint}}
+		& $h=\SI{1}{\micro\second}$	&   2412.932	& 10011577	&      0.241	&      0.033	& (0.03)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.01\\
+		& $h=\SI{10}{\micro\second}$	&    165.374	&  1002322	&      0.165	&      0.948	& (0.95)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.24\\
+		& $h=\SI{100}{\micro\second}$	&     13.282	&   101298	&      0.131	&      3.156	& (3.16)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.79\\
+		& $h=\SI{1}{\milli\second}$	&      1.482	&    11226	&      0.132	&      9.820	& (9.82)	&      0.088	& (0.08)	&      0.027	& (0.05)	&      0.000	& (0.00)	& 2.49\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Runge-Kutta}}
+		& $h=\SI{1}{\micro\second}$	&   3873.598	& 10011577	&      0.387	&      0.033	& (0.03)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.01\\
+		& $h=\SI{10}{\micro\second}$	&    314.017	&  1002322	&      0.313	&      0.948	& (0.95)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.24\\
+		& $h=\SI{100}{\micro\second}$	&     32.832	&   101298	&      0.324	&      3.155	& (3.16)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.79\\
+		& $h=\SI{1}{\milli\second}$	&      3.024	&    11226	&      0.269	&      9.817	& (9.82)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 2.45\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{6}{*}{\parbox{1.5cm}{\raggedleft Dormand-Prince}}
+		& $e=\SI{1}{\micro\nothing}$	&   2286.730	&  1933179	&      1.183	&      0.033	& (0.03)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.01\\
+		& $e=\SI{10}{\micro\nothing}$	&    572.327	&   699514	&      0.818	&      0.336	& (0.34)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.08\\
+		& $e=\SI{100}{\micro\nothing}$	&     54.232	&    74227	&      0.731	&      1.330	& (1.33)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 0.33\\
+		& $e=\SI{1}{\milli\nothing}$	&      7.367	&    10398	&      0.708	&      4.200	& (4.20)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.00)	& 1.05\\
+		& $e=\SI{10}{\milli\nothing}$	&      2.621	&     4072	&      0.644	&     10.879	& (10.88)	&      0.003	& (0.00)	&      0.001	& (0.00)	&      0.000	& (0.00)	& 2.72\\
+		& $e=\SI{100}{\milli\nothing}$	&      3.019	&     3741	&      0.807	&     13.645	& (13.64)	&      0.028	& (0.02)	&      0.007	& (0.01)	&      0.000	& (0.00)	& 3.42\\
+	\bottomrule
+\end{tabular}
+\label{tbl:integrator_ifcondexp}
+\end{sidewaystable}
+
+% BENCHMARK 2: AdExp Model, fast exp
+% ==================================
+
+\begin{sidewaystable}[p]
+\caption[Integrator performance for the AdExp model with approximated exponential]{\parbox[t][][t]{19.5cm}{Differential equation integrator performance for the AdExp model with approximation of the exponential function used in the spiking mechanism. Errors are RMSE values compared to a Runge-Kutta integration with $\SI{100}{\nano\second}$ sample time (and full precision exponential). Percentages represent RMSE normalised to the value range. Simulated time is \SI{10}{\second} at 100 input spike groups with 33 output spikes.}}
+\small
+\centering
+\begin{tabular}{p{1.5cm} l r r r rr rr rr rr r}
+	\toprule
+	\multicolumn{2}{c}{\multirow{2}{*}{\textit{Integrator}}} &\multicolumn{3}{c}{\textit{Time and samples}} &\multicolumn{9}{c}{\textit{Error (RMSE)}} \\
+	\cmidrule(r){3-5}\cmidrule(l){6-14}
+	 &
+ & \multicolumn{1}{c}{$t \, [\si{\milli\second}]$} & \multicolumn{1}{c}{$N$} & \multicolumn{1}{c}{$\frac{t}{N} \, [\si{\micro\second}]$} & \multicolumn{2}{c}{$\um \, [\si{\milli\volt}]$ (\%)} & \multicolumn{2}{c}{$\Ge \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$\Gi \, [\si{\nano\siemens}]$ (\%)} & \multicolumn{2}{c}{$w \, [\si{\nano\ampere}]$ (\%)} & Avg. \% \\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Euler}}
+		& $h=\SI{1}{\micro\second}$	&   2244.048	& 10011577	&      0.224	&      0.361	& (0.36)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.33)	& 0.17\\
+		& $h=\SI{10}{\micro\second}$	&    182.803	&  1002278	&      0.182	&      0.930	& (0.93)	&      0.012	& (0.01)	&      0.004	& (0.01)	&      0.001	& (0.72)	& 0.42\\
+		& $h=\SI{100}{\micro\second}$	&     15.416	&   101255	&      0.152	&      3.530	& (3.53)	&      0.122	& (0.11)	&      0.039	& (0.07)	&      0.011	& (6.60)	& 2.58\\
+		& $h=\SI{1}{\milli\second}$	&      1.651	&    11190	&      0.148	&      8.358	& (8.36)	&      1.225	& (1.07)	&      0.382	& (0.64)	&      0.017	& (10.66)	& 5.18\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Midpoint}}
+		& $h=\SI{1}{\micro\second}$	&   2994.206	& 10011577	&      0.299	&      0.306	& (0.31)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.30)	& 0.15\\
+		& $h=\SI{10}{\micro\second}$	&    264.261	&  1002278	&      0.264	&      0.887	& (0.89)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.70)	& 0.40\\
+		& $h=\SI{100}{\micro\second}$	&     23.706	&   101249	&      0.234	&      3.554	& (3.55)	&      0.001	& (0.00)	&      0.000	& (0.00)	&      0.038	& (23.67)	& 6.80\\
+		& $h=\SI{1}{\milli\second}$	&      2.579	&    11161	&      0.231	&     42.230	& (42.23)	&      0.088	& (0.08)	&      0.027	& (0.05)	&      2.424	& (1514.39)	& 389.19\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{4}{*}{\parbox{1.5cm}{\raggedleft Runge-Kutta}}
+		& $h=\SI{1}{\micro\second}$	&   5045.481	& 10011577	&      0.504	&      0.294	& (0.29)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.29)	& 0.15\\
+		& $h=\SI{10}{\micro\second}$	&    460.079	&  1002278	&      0.459	&      0.856	& (0.86)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.70)	& 0.39\\
+		& $h=\SI{100}{\micro\second}$	&     47.700	&   101251	&      0.471	&      3.932	& (3.93)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.040	& (24.81)	& 7.19\\
+		& $h=\SI{1}{\milli\second}$	&      4.560	&    11149	&      0.409	&     48.258	& (48.26)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      2.754	& (1720.25)	& 442.13\\
+
+	\cmidrule(r){1-2}\cmidrule(r){3-5}\cmidrule(r){6-7}\cmidrule(r){8-9}\cmidrule(r){10-11}\cmidrule(r){12-13}\cmidrule(l){14-14}
+
+	\multirow{6}{*}{\parbox{1.5cm}{\raggedleft Dormand-Prince}}
+		& $e=\SI{1}{\micro\nothing}$	&   2989.163	&  1933991	&      1.546	&      0.294	& (0.29)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.30)	& 0.15\\
+		& $e=\SI{10}{\micro\nothing}$	&    735.503	&   699604	&      1.051	&      0.285	& (0.29)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.000	& (0.27)	& 0.14\\
+		& $e=\SI{100}{\micro\nothing}$	&     74.478	&    74522	&      0.999	&      0.323	& (0.32)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.32)	& 0.16\\
+		& $e=\SI{1}{\milli\nothing}$	&     10.839	&    10792	&      1.004	&      0.437	& (0.44)	&      0.000	& (0.00)	&      0.000	& (0.00)	&      0.001	& (0.36)	& 0.20\\
+		& $e=\SI{10}{\milli\nothing}$	&      4.739	&     4504	&      1.052	&      2.164	& (2.16)	&      0.003	& (0.00)	&      0.001	& (0.00)	&      0.006	& (4.04)	& 1.55\\
+		& $e=\SI{100}{\milli\nothing}$	&      4.205	&     3964	&      1.061	&      3.610	& (3.61)	&      0.028	& (0.02)	&      0.008	& (0.01)	&      0.020	& (12.18)	& 3.96\\
+	\bottomrule
+\end{tabular}
+\label{tbl:integrator_adexp_fastexp}
+\end{sidewaystable}

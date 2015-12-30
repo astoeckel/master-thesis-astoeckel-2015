@@ -1,0 +1,122 @@
+%
+% Master Thesis
+%
+% Design Space Exploration of Associative Memories Using Spiking Neurons with
+% Respect to Neuromorphic Hardware Implementations.
+%
+% Copyright (c) 2015 Andreas Stöckel
+%
+% In its entirety, this document is licensed under a Creative Commons
+% Attribution-No Derivatives 4.0 International License}. Individual figures --
+% unless an external source is explicitly specified -- are licensed under a
+% Creative Commons Attribution 4.0 International License. They may -- in
+% addition to what is permitted by copyright law -- be reused and modified for
+% any purpose, as long as a reference to this document is provided.
+%
+
+\documentclass[a4paper,11pt]{memoir}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[ngerman,english]{babel}
+
+\input{smart-thesis/style}
+\input{smart-thesis/common-packages}
+\input{smart-thesis/common-macros}
+
+\usepackage{siunitx}
+\usepackage{nicefrac}
+\usepackage{circuitikz}
+\usepackage{glossary-mcols}
+\usepackage{rotating}
+\usepackage{minted}
+\usemintedstyle{friendly}
+
+\renewcommand{\glossarypreamble}{\small}
+\renewcommand*{\bibfont}{\small\sloppy}
+
+\colorlet{margincaption}{smartblue}
+\colorlet{cite}{black}
+\colorlet{ref}{black}
+\colorlet{url}{black}
+
+\setcounter{tocdepth}{3}
+
+\renewcommand{\baselinestretch}{1.05}
+
+\newglossarystyle{symbols}{%
+  \setglossarystyle{long}%
+  \renewenvironment{theglossary}%
+     {\renewcommand{\arraystretch}{1.25}%
+      \begin{longtable}[l]{@{}p{\dimexpr 1cm-\tabcolsep}p{\dimexpr \textwidth-1.25cm}}}
+     {\end{longtable}}%
+ }
+\newglossarystyle{acronyms}{%
+  \setglossarystyle{long}%
+  \renewenvironment{theglossary}%
+     {\renewcommand{\arraystretch}{1.25}%
+      \begin{longtable}[l]{@{}p{\dimexpr 2cm-\tabcolsep}p{\dimexpr \textwidth-2.25cm}}}
+     {\end{longtable}}%
+ }
+
+% Loads bibliography for citations.
+\addbibresource{bibliography.bib}
+
+% Custom math commands
+\input{math}
+
+% Starts creation of a glossary.
+\makeglossaries
+\input{glossary}
+
+% Define all the metadata to be listed in \smarttitle and \smartcopyright
+\thesistype{Master Thesis}
+\discipline{Intelligent Systems}
+\title{Design Space Exploration of Associative Memories using Spiking Neurons with respect to Neuromorphic Hardware Implementations}
+\author{Andreas Stöckel}
+\institution{Bielefeld University,Faculty of Technology,Cognitronics and Sensor Systems Group}
+\supervisors{Prof.\@~Dr.-Ing.\@~Ulrich Rückert,M.Sc.\@~Thomas Schöpping}
+\internalid{M16}
+\date{December 21, 2015}
+
+\begin{document}
+% FRONTMATTER
+\frontmatter
+\include{frontmatter/title}
+\include{frontmatter/copyright}
+\include{frontmatter/epigraph}
+\include{frontmatter/abstract}
+\include{frontmatter/acknowledgements}
+\cleardoublepage
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\vspace{2cm}
+\listofalgorithms
+
+% MAINMATTER
+\mainmatter
+\include{chapters/01_introduction}
+\include{chapters/02_related_work}
+\include{chapters/03_spinam}
+\include{chapters/04_design_space_evaluation}
+\include{chapters/05_experiments}
+\include{chapters/06_conclusion}
+
+% APPENDIX
+\appendix
+\include{appendix/A_code_examples}
+\include{appendix/B_tables}
+\include{appendix/C_single_neuron_evaluation}
+
+% BACKMATTER
+\backmatter
+\printglossary[style=acronyms,type=\acronymtype]
+\printglossary[style=symbols,title=Symbols]
+\printbibliography[heading=bibintoc]
+\include{backmatter/declaration_of_originality}
+\end{document}
+
