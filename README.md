@@ -30,7 +30,7 @@ All figures can be found in the `media` folder. The SVG source code of most figu
 is stored in the `source` folder. The figures can be edited using the free vector
 graphics editor Inkscape. Scripts and programms used for the generation of
 the figures can be found in the corresponding `code` folders. Some scripts for the
-generation of figures can be found in the [PyNAM](https://github.com/hpb-sanncs/pynam/)
+generation of figures can be found in the [PyNAM](https://github.com/hbp-sanncs/pynam/tree/master/misc)
 project.
 
 
