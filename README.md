@@ -6,11 +6,25 @@ Design Space Exploration of Associative Memories using Spiking Neurons with Resp
 Abstract
 --------
 
-Artificial neural networks are well-established models for key functions of biological brains, such as low-level sensory processing and memory. In particular, networks of artificial spiking neurons emulate the time dynamics, high parallelisation and asynchronicity of their biological counterparts. Large scale hardware simulators for such networks -- \emph{neuromorphic} computers -- are developed as part of the Human Brain Project, with the ultimate goal to gain insights regarding the neural foundations of cognitive processes.
+Artificial neural networks are well-established models for key functions of
+biological brains, such as low-level sensory processing and memory. In
+particular, networks of artificial spiking neurons emulate the time dynamics,
+high parallelisation and asynchronicity of their biological counterparts. Large
+scale hardware simulators for such networks – *neuromorphic* computers – are
+developed as part of the Human Brain Project, with the ultimate goal to gain
+insights regarding the neural foundations of cognitive processes.
 
-In this thesis, we focus on one key cognitive function of biological brains, associative memory. We implement the well-understood Willshaw model for artificial spiking neural networks, thoroughly explore the design space for the implementation, provide fast design space exploration software and evaluate our implementation in software simulation as well as neuromorphic hardware.
+In this thesis, we focus on one key cognitive function of biological brains,
+associative memory. We implement the well-understood Willshaw model for
+artificial spiking neural networks, thoroughly explore the design space for the
+implementation, provide fast design space exploration software and evaluate our
+implementation in software simulation as well as neuromorphic hardware.
 
-Thereby we provide an approach to manually or automatically infer viable parameters for an associative memory on different hardware and software platforms. The performance of the associative memory was found to vary significantly between individual neuromorphic hardware platforms and numerical simulations. The network is thus a suitable benchmark for neuromorphic systems.
+Thereby we provide an approach to manually or automatically infer viable
+parameters for an associative memory on different hardware and software
+platforms. The performance of the associative memory was found to vary
+significantly between individual neuromorphic hardware platforms and numerical
+simulations. The network is thus a suitable benchmark for neuromorphic systems.
 
 Build
 -----
@@ -39,12 +53,15 @@ License
 
 In its entirety, this document is licensed under a
 [Creative Commons Attribution-No Derivatives 4.0 International License](http://creativecommons.org/licenses/by-nd/4.0/).
-Individual figures -- unless an external source is explicitly specified -- are licensed under a
-[Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). They may --
-in addition to what is permitted by copyright law -- be reused and modified for any purpose, as long as a reference to this document is provided.
+Individual figures – unless an external source is explicitly specified – are
+licensed under a
+[Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+They may – in addition to what is permitted by copyright law – be reused and
+modified for any purpose, as long as a reference to this document is provided.
 
-The *Smart Thesis* template used in this document was written by Jan Philip Göpfert and Andreas Stöckel and is
-inspired by the *Classic Thesis* template developed by André Miede. The source code of this document and all
+The *Smart Thesis* template used in this document was written by Jan Philip
+Göpfert and Andreas Stöckel and is inspired by the *Classic Thesis* template
+developed by André Miede. The source code of this document and all
 described software tools are available at: https://github.com/hbp-sanncs/
 
 Author
