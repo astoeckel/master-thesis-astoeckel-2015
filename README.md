@@ -1,6 +1,8 @@
 Design Space Exploration of Associative Memories using Spiking Neurons with Respect to Neuromorphic Hardware Implementations
 ============================================================================================================================
 
+[Download PDF from GitHub](https://github.com/hbp-sanncs/master-thesis-astoeckel-2015/releases/download/v1.0/master_astoecke_design_space_exploration_2015.pdf)
+
 Abstract
 --------
 
