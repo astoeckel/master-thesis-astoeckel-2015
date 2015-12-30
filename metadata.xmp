@@ -1,5 +1,10 @@
 <?xpacket begin='' id=''?>
-<x:xmpmeta xmlns:x='adobe:ns:meta/'>
+<x:xmpmeta xmlns:x='adobe:ns:meta/' xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:title>Design Space Exploration of Associative Memories using Spiking Neurons with respect to Neuromorphic Hardware Implementations</dc:title>
+  <dc:creator>Stöckel, Andreas</dc:creator>
+  <dc:subject>Neuromorphic Hardware, Associative Memories</dc:subject>
+  <dc:date>2015-12-21</dc:date>
+  <dc:language>en_GB</dc:language>
   <rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
     <rdf:Description rdf:about=''
 		     xmlns:xapRights='http://ns.adobe.com/xap/1.0/rights/'>
@@ -32,8 +37,7 @@
     <rdf:Description rdf:about=''
       xmlns:cc='http://creativecommons.org/ns#'>
       <cc:attributionName>Andreas Stöckel</cc:attributionName>
-    </rdf:Description>
-    
+    </rdf:Description>  
   </rdf:RDF>
 </x:xmpmeta>
 <?xpacket end='r'?>
