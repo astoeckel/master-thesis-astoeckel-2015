@@ -486,7 +486,7 @@ For practical experiments with relatively small networks, uncorrelatedness does 
 
 The introduction of the \emph{balancing} condition -- besides uncorrelatedness and uniqueness of the input vectors -- allows to ensure this. For any $k' \leq \nSamples$ the column sums of a generated data block $\matData$ (which may either refer to the input data \matIn or the output \matOut) must be balanced. Specifically, it must hold
 \begin{align}
-	\max_j\left\{\sum\nolimits_{k = 1}^{k'} \matData_{kj}\right\} - \min_j\left\{\sum\nolimits_{k = 1}^{k} \matData_{kj}\right\} \leq 1 \, \forall k \leq \nSamples \,.
+	\max_j\left\{\sum\nolimits_{k = 1}^{k'} \matData_{kj}\right\} - \min_j\left\{\sum\nolimits_{k = 1}^{k'} \matData_{kj}\right\} \leq 1 \, \forall k' \leq \nSamples \,.
 	\label{eqn:balancing_condition}
 \end{align}
 A potential effect of the balancing is shown in \cref{fig:binam_occupancy_data}: when calculating how many times a cell in the \BiNAM is set to one during training -- which can be computed as  $X^T \cdot Y$ -- the variance in occupancy significantly reduces when balancing is enabled.
