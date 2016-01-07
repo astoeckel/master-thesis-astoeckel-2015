@@ -333,7 +333,7 @@ The actual threshold current used in the integrator $\ITh'$ is then defined as $
 \marginnote{The utilised exponential function approximation is provided in the \enquote{fastapprox}-library \cite{fastapprox}.}
 Profiling shows that more than 25\% of the simulation time is spent in the evaluation of the exponential in \cref{eqn:threshold_current} (\cref{tbl:benchmark_profile}). Fortunately, approximations of the exponential function exist, which exploit the bit-level layout of IEEE~754 floating point numbers to reduce the exponential to
 \begin{align}
-	\exp(x) &= \ln(2) \cdot 2^a \cdot 2^b \text{ with } a = \lfloor x \rfloor, b = x - a, b \in [0, 1]\,,
+	e^x &= 2^{x'} = 2^a \cdot 2^b \text{ with } x' = \ln(2)^{-1} \cdot x, a = \lfloor x' \rfloor, b = x' - a\,,
 \end{align}
 with the integer $2^a$ being encoded as exponent, and the fractional $2^b$ approximated with a few multiplications. More details on exponential function approximation can be found in \cite{schraudolph1999fast}. The results of a profiling run with activated approximation is given in \cref{tbl:benchmark_profile_fastexp}. The total runtime of the simulator decreases by 13\%, whereas there is no significant increase in the integration error (compare \cref{tbl:integrator_adexp,tbl:integrator_adexp_fastexp}). The benchmark is further discussed in \cref{sec:integrator_benchmark}.
 
